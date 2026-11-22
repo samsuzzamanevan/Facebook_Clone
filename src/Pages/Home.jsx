@@ -93,42 +93,42 @@ function Home() {
                 <div className='py-2 overflow-x-auto scrollbar-none bg-white'>
                     <Flex className='gap-x-1 w-max'>
 
-                        <div className='h-40 w-30 rounded-md  bg-blue-50 relative border border-[#57555525]'>
+                        <div className='h-50 w-30 rounded-md  bg-blue-50 relative border border-[#57555525]'>
                             <div className='p-2.5 text-white bg-blue-600 rounded-full border border-white absolute bottom-8 left-11 '>
                                 <MdAdd />
                             </div>
                             <Peragraph pText='Create story' className='font-[roboto] text-[10px] text-black absolute bottom-0.5 left-[50%] -translate-x-9  w-17 text-center' />
                             <Image alt='adsf' src={Evan} className='w-full h-7/10 object-top object-cover rounded-t-md border-0' />
                         </div>
-                        <div className='h-40 w-30 rounded-md  bg-amber-200 relative'>
+                        <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
                             <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
                                 <Image className='object-cover object-center' />
                             </div>
                             <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
                             <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
                         </div>
-                        <div className='h-40 w-30 rounded-md  bg-amber-200 relative'>
+                        <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
                             <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
                                 <Image className='object-cover object-center' />
                             </div>
                             <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
                             <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
                         </div>
-                        <div className='h-40 w-30 rounded-md  bg-amber-200 relative'>
+                        <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
                             <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
                                 <Image className='object-cover object-center' />
                             </div>
                             <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
                             <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
                         </div>
-                        <div className='h-40 w-30 rounded-md  bg-amber-200 relative'>
+                        <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
                             <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
                                 <Image className='object-cover object-center' />
                             </div>
                             <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
                             <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
                         </div>
-                        <div className='h-40 w-30 rounded-md  bg-amber-200 relative'>
+                        <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
                             <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
                                 <Image className='object-cover object-center' />
                             </div>
