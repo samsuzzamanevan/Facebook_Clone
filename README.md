@@ -14,3 +14,12 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## Getting Started
+
+- This is a clone of Facebook, built using React and Vite. It utilizes the latest versions: React 18.2.0 and Vite 5.0.0.
+- All necessary dependencies have been installed, and their specific versions are listed in the `package-lock.json` file.
+- A ready-made backend solution has been used here.
+
+

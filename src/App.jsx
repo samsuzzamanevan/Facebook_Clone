@@ -1,10 +1,20 @@
 import React from 'react'
+import { createRoutesFromElements, createBrowserRouter, Route, RouterProvider,} from "react-router-dom";
+import Home from './Pages/Home';
 
 function App() {
+  
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route  path="/" element={< Home/>}> </Route>
+      )
+  );
+  
+
+
+
   return (
-    <div className='text-red-900'>
-      Hello
-    </div>
+    <RouterProvider router={router}/>
   )
 }
 
