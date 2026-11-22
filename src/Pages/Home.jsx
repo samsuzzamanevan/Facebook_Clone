@@ -205,6 +205,271 @@ function Home() {
 
                     </div>
 
+                    <div className='bg-white my-1'>
+
+                        <Flex className='justify-between px-2 py-1 pt-2'>
+
+                            <Flex className='gap-x-1.5'>
+
+                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
+                                    <Image className='object-cover object-center' />
+                                </div>
+
+                                <div>
+                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
+                                    <Flex className='gap-x-[1px]'>
+                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
+                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
+                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    </Flex>
+                                </div>
+
+                            </Flex>
+
+
+                            <Flex className='gap-x-3'>
+                                <BsThreeDots className='text-[#464444]' />
+                                <RxCross2 className='text-[#444444]' />
+                            </Flex>
+
+                        </Flex>
+
+                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
+
+                        <div className='h-40 w-full bg-blue-50'>
+                            <Image className='h-full w-full object-center object-contain' src={Evan} />
+                        </div>
+
+
+                        <Flex className='gap-x-2.5 py-1.5 px-2'>
+                            <div>
+                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                        </Flex>
+
+
+
+
+                    </div>
+
+                    <div className='bg-white my-1'>
+
+                        <Flex className='justify-between px-2 py-1 pt-2'>
+
+                            <Flex className='gap-x-1.5'>
+
+                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
+                                    <Image className='object-cover object-center' />
+                                </div>
+
+                                <div>
+                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
+                                    <Flex className='gap-x-[1px]'>
+                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
+                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
+                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    </Flex>
+                                </div>
+
+                            </Flex>
+
+
+                            <Flex className='gap-x-3'>
+                                <BsThreeDots className='text-[#464444]' />
+                                <RxCross2 className='text-[#444444]' />
+                            </Flex>
+
+                        </Flex>
+
+                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
+
+                        <div className='h-40 w-full bg-blue-50'>
+                            <Image className='h-full w-full object-center object-contain' src={Evan} />
+                        </div>
+
+
+                        <Flex className='gap-x-2.5 py-1.5 px-2'>
+                            <div>
+                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                        </Flex>
+
+
+
+
+                    </div>
+
+                    <div className='bg-white my-1'>
+
+                        <Flex className='justify-between px-2 py-1 pt-2'>
+
+                            <Flex className='gap-x-1.5'>
+
+                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
+                                    <Image className='object-cover object-center' />
+                                </div>
+
+                                <div>
+                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
+                                    <Flex className='gap-x-[1px]'>
+                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
+                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
+                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    </Flex>
+                                </div>
+
+                            </Flex>
+
+
+                            <Flex className='gap-x-3'>
+                                <BsThreeDots className='text-[#464444]' />
+                                <RxCross2 className='text-[#444444]' />
+                            </Flex>
+
+                        </Flex>
+
+                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
+
+                        <div className='h-40 w-full bg-blue-50'>
+                            <Image className='h-full w-full object-center object-contain' src={Evan} />
+                        </div>
+
+
+                        <Flex className='gap-x-2.5 py-1.5 px-2'>
+                            <div>
+                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                        </Flex>
+
+
+
+
+                    </div>
+
+                    <div className='bg-white my-1'>
+
+                        <Flex className='justify-between px-2 py-1 pt-2'>
+
+                            <Flex className='gap-x-1.5'>
+
+                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
+                                    <Image className='object-cover object-center' />
+                                </div>
+
+                                <div>
+                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
+                                    <Flex className='gap-x-[1px]'>
+                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
+                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
+                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    </Flex>
+                                </div>
+
+                            </Flex>
+
+
+                            <Flex className='gap-x-3'>
+                                <BsThreeDots className='text-[#464444]' />
+                                <RxCross2 className='text-[#444444]' />
+                            </Flex>
+
+                        </Flex>
+
+                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
+
+                        <div className='h-40 w-full bg-blue-50'>
+                            <Image className='h-full w-full object-center object-contain' src={Evan} />
+                        </div>
+
+
+                        <Flex className='gap-x-2.5 py-1.5 px-2'>
+                            <div>
+                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                        </Flex>
+
+
+
+
+                    </div>
+
+                    <div className='bg-white my-1'>
+
+                        <Flex className='justify-between px-2 py-1 pt-2'>
+
+                            <Flex className='gap-x-1.5'>
+
+                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
+                                    <Image className='object-cover object-center' />
+                                </div>
+
+                                <div>
+                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
+                                    <Flex className='gap-x-[1px]'>
+                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
+                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
+                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    </Flex>
+                                </div>
+
+                            </Flex>
+
+
+                            <Flex className='gap-x-3'>
+                                <BsThreeDots className='text-[#464444]' />
+                                <RxCross2 className='text-[#444444]' />
+                            </Flex>
+
+                        </Flex>
+
+                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
+
+                        <div className='h-40 w-full bg-blue-50'>
+                            <Image className='h-full w-full object-center object-contain' src={Evan} />
+                        </div>
+
+
+                        <Flex className='gap-x-2.5 py-1.5 px-2'>
+                            <div>
+                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                            <div>
+                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                            </div>
+                        </Flex>
+
+
+
+
+                    </div>
+
 
                 </div>
 
