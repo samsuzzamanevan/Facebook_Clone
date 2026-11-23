@@ -7,12 +7,11 @@ import { CgProfile } from "react-icons/cg";
 import Flex from '../Layouts/Flex';
 import { Link } from 'react-router-dom';
 import VideoIcon from './VideoIcon';
-import { Outlet, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
+
 
 function Navbar() {
 
-    const location = useLocation();
+
     let [bgColor, setBgColor] = useState('text-blue-600')
 
 
@@ -23,20 +22,6 @@ function Navbar() {
 
     return (
         <>
-
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={location.pathname}
-                    initial={{ x: '100%' }}
-                    animate={{ x: 0 }}
-                    exit={{ x: '-100%' }}
-                    transition={{ duration: 0.3 }}
-                    className="pb-16"
-                >
-                    <Outlet />
-                </motion.div>
-            </AnimatePresence>
-
 
 
             {/* Navbar start */}
