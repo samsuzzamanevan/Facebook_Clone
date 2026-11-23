@@ -388,8 +388,8 @@ function Home() {
 
                 <Flex className='justify-around border-t py-3.5 border-blue-200 w-full'>
 
-                    <FiHome className='text-[20px]' />
-                    <div className='h-5 w-5 bg-white border-2 rounded-[5px] '>
+                    <FiHome className='text-[24px]' />
+                    <div className='h-6 w-6 bg-white border-2 rounded-[5px] '>
                         <div className='h-3/10 w-full flex flex-wrap'>
                             <div className='h-full w-3/9 bg-white border'></div>
                             <div className='h-full w-3/9 bg-white border'></div>
@@ -398,10 +398,10 @@ function Home() {
                         <IoPlay className='text-[10px] mx-auto' />
 
                     </div>
-                    <SlPeople className='text-[20px]' />
-                    <CiShop className='text-[20px] text-[#000000]' />
-                    <PiBellBold className='text-[20px] text-[#000000]' />
-                    <CgProfile className='text-[20px] text-[#000000]' />
+                    <SlPeople className='text-[24px]' />
+                    <CiShop className='text-[24px] text-[#000000]' />
+                    <PiBellBold className='text-[24px] text-[#000000]' />
+                    <CgProfile className='text-[24px] text-[#000000]' />
 
                 </Flex>
 
