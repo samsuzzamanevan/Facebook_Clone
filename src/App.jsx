@@ -7,6 +7,8 @@ import Shoping from './Pages/Shoping';
 import Notification from './Pages/Notification';
 import Profile from './Pages/Profile';
 import Layout from './Layouts/Layout';
+import Registration from './Pages/Registration';
+import Login from './Pages/Login';
 
 function App() {
   
@@ -14,13 +16,14 @@ function App() {
     createRoutesFromElements(
       <Route>
         
-        <Route  path="/" element={< Home/>}> </Route>
+        <Route  path="/home" element={< Home/>}> </Route>
         <Route  path="/video" element={< Video/>}> </Route>
         <Route  path="/freinds" element={< Freinds/>}> </Route>
         <Route  path="/shoping" element={< Shoping/>}> </Route>
         <Route  path="/notification" element={< Notification/>}> </Route>
         <Route  path="/profile" element={< Profile/>}> </Route>
-
+        <Route  path='/registration' element={<Registration/>}></Route>
+        <Route  path='/' element={<Login/>}></Route>
       </Route>
       )
   );

@@ -17,7 +17,7 @@ function Navbar() {
 
 
 
-    let [link, setLink] = useState(['/', '/video', '/freinds', '/shoping', '/notification', '/profile'])
+    let [link, setLink] = useState(['/home', '/video', '/freinds', '/shoping', '/notification', '/profile'])
     let [icons, setIcons] = useState([<FiHome className='text-[24px]' />, <VideoIcon />, <SlPeople className='text-[24px]' />, <CiShop className='text-[24px]' />, <PiBellBold className='text-[24px] ' />, <CgProfile className='text-[24px]' />])
 
     return (
@@ -34,7 +34,7 @@ function Navbar() {
 
                     {
                         icons.map((item, index) => (
-                            <Link to={link[index]} key={index} className='active:text-blue-300 duration-300'>{item}</Link>
+                            <Link to={link[index]} key={index} >{item}</Link>
                         ))
                     }
 

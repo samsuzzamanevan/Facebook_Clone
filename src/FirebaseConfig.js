@@ -1,19 +1,16 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics"; 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCP9IpAKKnhTcyT4wr44nhDTnKN1npkFzQ",
-  authDomain: "facebook-public-database.firebaseapp.com",
-  projectId: "facebook-public-database",
-  storageBucket: "facebook-public-database.firebasestorage.app",
-  messagingSenderId: "177872098496",
-  appId: "1:177872098496:web:d07471f9371291ea830925",
-  measurementId: "G-5PR6GVBF6T"
+  apiKey: "AIzaSyA9zSA7zA4LumgHITEtAaHSpJMJ3pPxiQo",
+  authDomain: "facebook-registration-dc744.firebaseapp.com",
+  projectId: "facebook-registration-dc744",
+  storageBucket: "facebook-registration-dc744.firebasestorage.app",
+  messagingSenderId: "1068724412665",
+  appId: "1:1068724412665:web:3cbcbf31bf8494913c0228",
+  measurementId: "G-EHYWGREW1X"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-export default firebaseConfig
+export default app
