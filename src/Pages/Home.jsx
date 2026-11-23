@@ -16,12 +16,8 @@ import { RxCross2 } from "react-icons/rx";
 import { SlLike } from "react-icons/sl";
 import { FaRegComment } from "react-icons/fa6";
 import { PiShareFat } from "react-icons/pi";
-import { IoPlay } from "react-icons/io5";
-import { FiHome } from "react-icons/fi";
-import { SlPeople } from "react-icons/sl";
-import { CiShop } from "react-icons/ci";
-import { PiBellBold } from "react-icons/pi";
-import { CgProfile } from "react-icons/cg";
+import Navbar from '../Layouts/Layout';
+
 
 
 
@@ -377,42 +373,7 @@ function Home() {
                 {/* Post part end */}
             </div>
 
-
-
-
-            {/* Navbar start */}
-
-
-            <div className='fixed w-full bottom-0 bg-white'>
-
-
-                <Flex className='justify-around border-t py-3 border-blue-200 w-full'>
-
-                    <FiHome className='text-[24px]' />
-                    <div className='h-5 w-6 bg-white border-2 rounded-[5px] '>
-                        <div className='h-3/10 w-full flex flex-wrap'>
-                            <div className='h-full w-3/9 bg-white border'></div>
-                            <div className='h-full w-3/9 bg-white border'></div>
-                            <div className='h-full w-3/9 bg-white border'></div>
-                        </div>
-                        <IoPlay className='text-[10px] mx-auto' />
-
-                    </div>
-                    <SlPeople className='text-[24px]' />
-                    <CiShop className='text-[24px] text-[#000000]' />
-                    <PiBellBold className='text-[24px] text-[#000000]' />
-                    <CgProfile className='text-[24px] text-[#000000]' />
-
-                </Flex>
-
-
-            </div>
-
-            {/* Navbar end */}
-
-
-
-
+            <Navbar/>
 
         </>
     )
