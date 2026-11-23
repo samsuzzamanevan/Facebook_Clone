@@ -383,7 +383,7 @@ function Home() {
             {/* Navbar start */}
 
 
-            <div className='fixed w-full -bottom-12 bg-white'>
+            <div className='fixed w-full bottom-0 bg-white'>
 
 
                 <Flex className='justify-around border-t py-3 border-blue-200 w-full'>
