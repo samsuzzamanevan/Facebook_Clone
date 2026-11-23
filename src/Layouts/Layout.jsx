@@ -34,7 +34,7 @@ function Navbar() {
 
                     {
                         icons.map((item, index) => (
-                            <Link to={link[index]} key={index} >{item}</Link>
+                            <Link to={link[index]} key={index} className='active:text-blue-300 duration-300'>{item}</Link>
                         ))
                     }
 
