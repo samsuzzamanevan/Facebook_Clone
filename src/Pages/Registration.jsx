@@ -70,10 +70,7 @@ function Registration() {
             createUserWithEmailAndPassword(auth, email, password)
                 .then(async (userCredential) => {
                     // Signed up
-                    console.log('Image:', image)
-                    console.log('Default:', defaultProfile)
-                    console.log('Profile Image:', profileImage)
-                    console.log('Length:', profileImage.length)
+                   
                     let profileImage = image || defaultProfile
                     const user = userCredential.user
                     try {
