@@ -211,7 +211,7 @@ function Home() {
                                                 <Flex className='gap-x-1.5'>
 
                                                     <div className='w-9.5 h-9.5 '>
-                                                        <Image className='object-cover object-center w-full h-full rounded-full' src={item.profileImage} />
+                                                        <Image className='object-cover object-center w-full h-full rounded-full' src={item.profileImage?item.profileImage:defaultProfile} />
                                                     </div>
 
                                                     <div>
