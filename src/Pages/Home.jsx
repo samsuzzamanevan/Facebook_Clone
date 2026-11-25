@@ -117,7 +117,7 @@ function Home() {
                             <Flex className='justify-between'>
 
                                 <div className='w-9.5 h-9.5  '>
-                                    <Image className='object-cover object-center w-full h-full rounded-full' src={profile.Image?profile.image:defaultProfile} />
+                                    <Image className='object-cover object-center w-full h-full rounded-full' src={profile.Image?profile.Image:defaultProfile} />
                                 </div>
                                 <div className=' py-0.5 px-4 w-8/10  rounded-2xl border border-[rgba(0,0,0,0.25)] font-[roboto] text-base text-[rgba(0,0,0,0.76)]' onClick={() => setPostType(false)}>
                                     What's on your mind?
@@ -202,7 +202,7 @@ function Home() {
 
                                 {
                                     arr.map((item, index) => {
-                                     
+                                     console.log(item.profileImage)
 
                                         return <div className='bg-white my-1' key={index}>
 
