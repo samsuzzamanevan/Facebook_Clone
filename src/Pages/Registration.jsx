@@ -127,9 +127,9 @@ function Registration() {
 
 
 
-                    } catch {
+                    } catch(error) {
                         setLoader(false)
-                        toast.error('problem')
+                        toast.error(error)
                     }
 
 
