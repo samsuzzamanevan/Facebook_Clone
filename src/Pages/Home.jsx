@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaBars } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import Flex from '../Layouts/Flex';
@@ -17,7 +17,10 @@ import { SlLike } from "react-icons/sl";
 import { FaRegComment } from "react-icons/fa6";
 import { PiShareFat } from "react-icons/pi";
 import Navbar from '../Layouts/Layout';
-
+import { getDatabase, ref, onValue } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import app from '../FirebaseConfig';
+import PostPage from './PostPage';
 
 
 
@@ -31,6 +34,36 @@ import Navbar from '../Layouts/Layout';
 
 function Home() {
 
+    const Auth = getAuth(app)
+    const db = getDatabase(app)
+    let [profile, setProfile] = useState({})
+    let [arr, setArr] = useState([])
+
+
+    useEffect(() => {
+
+        onAuthStateChanged(Auth, (user) => {
+            if (user) {
+                setProfile({
+                    Name: user.displayName,
+                    Image: user.photoURL
+                })
+            }
+        })
+
+        const starCountRef = ref(db, 'posts/');
+        onValue(starCountRef, (snapshot) => {
+            const data = snapshot
+            let arr2 = []
+            data.forEach(itmes=>{
+                
+                arr2.push(itmes.val())
+            })
+            setArr(arr2)
+        });
+
+
+    }, [])
 
 
 
@@ -73,8 +106,8 @@ function Home() {
             <div className='w-19/20 mx-auto py-1 overflow-x-hidden bg-white'>
                 <Flex className='justify-between'>
 
-                    <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
-                        <Image className='object-cover object-center' />
+                    <div className='w-9.5 h-9.5  '>
+                        <Image className='object-cover object-center w-full h-full rounded-full' src={profile.Image} />
                     </div>
                     <div className=' py-0.5 px-4 w-8/10  rounded-2xl border border-[rgba(0,0,0,0.25)] font-[roboto] text-base text-[rgba(0,0,0,0.76)]'>
                         What's on your mind?
@@ -156,214 +189,72 @@ function Home() {
                 <div>
 
 
-                    <div className='bg-white my-1'>
 
-                        <Flex className='justify-between px-2 py-1 pt-2'>
+                    {
+                        arr.map((item, index) => {
+                            console.log(item)
 
-                            <Flex className='gap-x-1.5'>
+                            return <div className='bg-white my-1' key={index}>
 
-                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
-                                    <Image className='object-cover object-center' />
-                                </div>
+                                <Flex className='justify-between px-2 py-1 pt-2'>
 
-                                <div>
-                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
-                                    <Flex className='gap-x-[1px]'>
-                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
-                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
-                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    <Flex className='gap-x-1.5'>
+
+                                        <div className='w-9.5 h-9.5 '>
+                                            <Image className='object-cover object-center rounded-full' src={item.profileImage} />
+                                        </div>
+
+                                        <div>
+                                            <Peragraph pText={item.username} className='text-sm font-semibold font-[inter] leading-6' />
+                                            <Flex className='gap-x-px'>
+                                                <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
+                                                <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
+                                                <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                            </Flex>
+                                        </div>
+
                                     </Flex>
-                                </div>
-
-                            </Flex>
 
 
-                            <Flex className='gap-x-3'>
-                                <BsThreeDots className='text-[#464444]' />
-                                <RxCross2 className='text-[#444444]' />
-                            </Flex>
-
-                        </Flex>
-
-                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
-
-                        <div className='h-40 w-full bg-blue-50'>
-                            <Image className='h-full w-full object-center object-contain' src={Evan} />
-                        </div>
-
-
-                        <Flex className='gap-x-2.5 py-1.5 px-2'>
-                            <div>
-                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                        </Flex>
-
-
-
-
-                    </div>
-                    <div className='bg-white my-1'>
-
-                        <Flex className='justify-between px-2 py-1 pt-2'>
-
-                            <Flex className='gap-x-1.5'>
-
-                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
-                                    <Image className='object-cover object-center' />
-                                </div>
-
-                                <div>
-                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
-                                    <Flex className='gap-x-[1px]'>
-                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
-                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
-                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
+                                    <Flex className='gap-x-3'>
+                                        <BsThreeDots className='text-[#464444]' />
+                                        <RxCross2 className='text-[#444444]' />
                                     </Flex>
+
+                                </Flex>
+
+                                <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText={item.des} />
+
+                                <div className='h-40 w-full bg-blue-50'>
+                                    <Image className='h-full w-full object-center object-contain' src={item.post} />
                                 </div>
 
-                            </Flex>
+
+                                <Flex className='gap-x-2.5 py-1.5 px-2'>
+                                    <div>
+                                        <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                                    </div>
+                                    <div>
+                                        <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                                    </div>
+                                    <div>
+                                        <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
+                                    </div>
+                                </Flex>
 
 
-                            <Flex className='gap-x-3'>
-                                <BsThreeDots className='text-[#464444]' />
-                                <RxCross2 className='text-[#444444]' />
-                            </Flex>
-
-                        </Flex>
-
-                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
-
-                        <div className='h-40 w-full bg-blue-50'>
-                            <Image className='h-full w-full object-center object-contain' src={Evan} />
-                        </div>
 
 
-                        <Flex className='gap-x-2.5 py-1.5 px-2'>
-                            <div>
-                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
                             </div>
-                            <div>
-                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                        </Flex>
+                        })
+                    }
 
 
 
 
-                    </div>
-                    <div className='bg-white my-1'>
-
-                        <Flex className='justify-between px-2 py-1 pt-2'>
-
-                            <Flex className='gap-x-1.5'>
-
-                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
-                                    <Image className='object-cover object-center' />
-                                </div>
-
-                                <div>
-                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
-                                    <Flex className='gap-x-[1px]'>
-                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
-                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
-                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
-                                    </Flex>
-                                </div>
-
-                            </Flex>
-
-
-                            <Flex className='gap-x-3'>
-                                <BsThreeDots className='text-[#464444]' />
-                                <RxCross2 className='text-[#444444]' />
-                            </Flex>
-
-                        </Flex>
-
-                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
-
-                        <div className='h-40 w-full bg-blue-50'>
-                            <Image className='h-full w-full object-center object-contain' src={Evan} />
-                        </div>
-
-
-                        <Flex className='gap-x-2.5 py-1.5 px-2'>
-                            <div>
-                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                        </Flex>
 
 
 
-
-                    </div>
-                    <div className='bg-white my-1'>
-
-                        <Flex className='justify-between px-2 py-1 pt-2'>
-
-                            <Flex className='gap-x-1.5'>
-
-                                <div className='w-9.5 h-9.5 rounded-full bg-amber-400'>
-                                    <Image className='object-cover object-center' />
-                                </div>
-
-                                <div>
-                                    <Peragraph pText='Samsuzzaman Evan' className='text-sm font-semibold font-[inter] leading-6' />
-                                    <Flex className='gap-x-[1px]'>
-                                        <Span spanText='9h' className='text-[12px] font-semibold text-[#585858] font-[inter] leading-0.5' />
-                                        <div className='w-0.5 rounded-full h-0.5 bg-[rgba(0,0,0,0.16)]'></div>
-                                        <FaEarthAsia className='text-[#8d8c8c] h-2.5' />
-                                    </Flex>
-                                </div>
-
-                            </Flex>
-
-
-                            <Flex className='gap-x-3'>
-                                <BsThreeDots className='text-[#464444]' />
-                                <RxCross2 className='text-[#444444]' />
-                            </Flex>
-
-                        </Flex>
-
-                        <Peragraph className='font-[inter] text-sm font-medium px-4 py-2' pText='my name is samsuzzaman!' />
-
-                        <div className='h-40 w-full bg-blue-50'>
-                            <Image className='h-full w-full object-center object-contain' src={Evan} />
-                        </div>
-
-
-                        <Flex className='gap-x-2.5 py-1.5 px-2'>
-                            <div>
-                                <SlLike className='text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <FaRegComment className='rotate-y-180 text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                            <div>
-                                <PiShareFat className=' text-[#585858] inline-block' /><Span spanText='100' className='text-sm text-[rgba(0,0,0,0.6)] font-[roboto] ms-1' />
-                            </div>
-                        </Flex>
-
-
-
-
-                    </div>
 
 
                 </div>
@@ -372,8 +263,8 @@ function Home() {
 
                 {/* Post part end */}
             </div>
-
-            <Navbar/>
+            <PostPage name={profile.Name} image={profile.Image} />
+            {/* <Navbar /> */}
 
         </>
     )

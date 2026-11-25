@@ -1,13 +1,16 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import React, { useEffect, useState } from 'react'
 import Input from '../Layouts/Input'
 import Label from '../Layouts/Label'
 import Flex from '../Layouts/Flex'
 import Button from '../Layouts/Button'
 import app from '../FirebaseConfig'
-import { updateProfile } from "firebase/auth";
+import { updateProfile,reload } from "firebase/auth";
 import { getDatabase, push, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { Oval } from "react-loader-spinner";
+
 
 function Registration() {
 
@@ -19,14 +22,16 @@ function Registration() {
     let [password, setPassword] = useState('')
     let [cpassword, setCpassword] = useState('')
     let [image, setImage] = useState(null)
+    let [loader, setLoader] = useState(false)
     const auth = getAuth(app);
     const db = getDatabase(app);
 
 
     const [nameError, setNameError] = useState('')
     const [emailError, setEmailError] = useState('')
-    const [passwordError,setPasswordError] = useState('')
-    const [cpasswordError,setCPasswordError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [cpasswordError, setCPasswordError] = useState('')
+
 
     let signUp = () => {
 
@@ -35,53 +40,120 @@ function Registration() {
             setNameError('please Write your Name')
         }
 
+
         if (!email) {
             setEmailError('please Write your Email')
         }
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            setEmailError('Please Enter a Valid Email')
+        }
 
-        if(!password){
+        if (!password) {
             setPasswordError('please Write password')
         }
-        if(!cpassword){
+        else if (!/(?=.*[a-z])/.test(password) || !/(?=.*[A-Z])/.test(password) || password.length < 6) {
+            setPasswordError('Password have to be at least 6 letters , 1 uppercase and 1 lowercase must')
+        }
+        if (!cpassword) {
             setCPasswordError('please Confirm Your password')
+        }
+        else if (password !== cpassword) {
+            setCPasswordError('Wrong password')
         }
 
 
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(async (userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                // ...
-                let send = await updateProfile(user, {
-                    displayName: name,
-                    photoURL: image
+        if (name && email && password && cpassword && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) && /(?=.*[a-z])/.test(password) && /(?=.*[A-Z])/.test(password) && password === cpassword) {
+            setLoader(true)
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(async (userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user
+                    try {
+
+                        await sendEmailVerification(user);
+                        
+                        
+                        setLoader(false)
+                        toast.success('Verification email sent! Please verify your email.')
+
+
+                        // ...
+                        let send = await updateProfile(user, {
+                            displayName: name,
+                            photoURL: image
+                        })
+
+
+                        set(ref(db, `users/${user.uid}`), {
+                            UserName: auth.currentUser.displayName,
+                            UserImage: auth.currentUser.photoURL,
+                            UserId: user.uid
+                        })
+                        
+
+                        let emailverification = async()=>{
+                            await reload(auth.currentUser)
+                            if(auth.currentUser.emailVerified){
+    
+                                   toast.success('Registration Successful')
+                                   setName('')
+                                   setEmail('')
+                                   setPassword('')
+                                   setCpassword('')
+                                   navigate('/home')
+                                   clearInterval(stop)
+                               
+                               }
+
+                        }
+                            
+                     let stop =   setInterval(() => {
+                         console.log(auth.currentUser.emailVerified)
+                         emailverification()
+                            
+                        }, 3000);
+                             
+                        
+                        
+                            
+
+
+
+
+
+
+                    } catch {
+                        setLoader(false)
+                        toast.error('problem')
+                    }
+
+
+
                 })
 
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    toast.error(errorMessage)
+                    setLoader(false)
+                    // ..
+                });
 
-                set(push(ref(db, 'users/')), {
-                    UserName: auth.currentUser.displayName,
-                    UserImage: auth.currentUser.photoURL
-                })
-
-                setName('')
-                setEmail('')
-                setPassword('')
-                setCpassword('')
-
-                navigate('/home')
-
-            })
-
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
+        }
 
 
     }
 
+
+   
+    
+    
+    
+    
+    
+
+    
 
     let collectImg = (e) => {
         let formdata = new FormData()
@@ -107,6 +179,7 @@ function Registration() {
     return (
         <>
 
+            <ToastContainer />
             <div className='py-10 w-10/10'>
 
 
@@ -145,21 +218,21 @@ function Registration() {
                                 setEmail(e.target.value)
                                 setEmailError('')
                             }} value={email} />
-                                <p className="text-red-600">{emailError}</p>
+                        <p className="text-red-600">{emailError}</p>
                     </div>
 
 
                     {/* Password */}
 
-                    <div>
+                    <div className="w-8/11">
 
                         <Label labelText='Password : ' id='password' className={`font-[inter] text-base block mb-1 ${passwordError == '' ? '' : ' text-red-400'}`} />
-                        <Input type='password' inpText='Password' className={`w-10/10 py-1 px-1 font-[inter] text-base outline-none border  rounded-lg ${passwordError == '' ? 'border-[rgba(44,44,44,0.2)]' : 'border-red-500 text-red-600'}`} id='password'
+                        <Input type='password' inpText='Password' className={`w-10/10 py-1 px-1 font-[inter] text-base outline-none border  rounded-lg ${passwordError == '' ? 'border-[rgba(44,44,44,0.2)]' : 'text-red-600'}`} id='password'
                             onchange={(e) => {
                                 setPassword(e.target.value)
                                 setPasswordError('')
-                                }} value={password} />
-                                <p className="text-red-600">{passwordError}</p>
+                            }} value={password} />
+                        <p className="text-red-600 w-8/10">{passwordError}</p>
 
                     </div>
 
@@ -169,14 +242,28 @@ function Registration() {
 
                     <div>
 
-                        <Label labelText='Confirm Password : ' id='cpassword' className={`font-[inter] text-base block mb-1 ${cpasswordError == '' ? '' : ' text-red-400'}`}/>
+                        <Label labelText='Confirm Password : ' id='cpassword' className={`font-[inter] text-base block mb-1 ${cpasswordError == '' ? '' : ' text-red-400'}`} />
                         <Input type='password' inpText='Confirm Password' className={`w-10/10 py-1 px-1 font-[inter] text-base outline-none border  rounded-lg ${cpasswordError == '' ? 'border-[rgba(44,44,44,0.2)]' : 'text-red-600'}`} id='cpassword'
                             onchange={(e) => {
                                 setCpassword(e.target.value)
                                 setCPasswordError('')
-                                }} value={cpassword} />
-                                <p className="text-red-600">{cpasswordError}</p>
+                            }} value={cpassword} />
+                        <p className="text-red-600">{cpasswordError}</p>
                     </div>
+                    {
+                        loader
+                            ?
+                            <Oval
+                                visible={true}
+                                height="30"
+                                width="30"
+                                color="#4fa94d"
+                                ariaLabel="oval-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
+                            : ''
+                    }
 
                     <Button btnText='Sign Up' className='py-1 rounded-md px-4 bg-blue-400 font-[inter] text-base text-white block mx-auto' onclick={signUp} />
                 </Flex>
@@ -189,3 +276,4 @@ function Registration() {
 }
 
 export default Registration
+
