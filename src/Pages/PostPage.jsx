@@ -9,9 +9,10 @@ import Button from '../Layouts/Button'
 import { getDatabase, push, ref, set } from "firebase/database";
 import app from '../FirebaseConfig'
 import { Oval } from 'react-loader-spinner'
+import defaultProfile from '../assets/EmptyProfile.avif'
 
 function PostPage({ className, image, name, setPostType }) {
-
+    console.log(name)
     const db = getDatabase(app)
 
     let [postDes, setPostDes] = useState('')
@@ -111,7 +112,7 @@ function PostPage({ className, image, name, setPostType }) {
                 </Flex>
 
                 <Flex className='gap-x-3.5 py-3 px-3'>
-                    <Image className='w-9.5 h-9.5 rounded-full object-center object-cover' src={image} />
+                    <Image className='w-9.5 h-9.5 rounded-full object-center object-cover' src={image?image:defaultProfile} />
                     <Peragraph pText={name} className='font-[inter] text-base font-medium' />
                 </Flex>
 

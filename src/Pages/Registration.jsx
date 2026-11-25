@@ -71,7 +71,7 @@ function Registration() {
                 .then(async (userCredential) => {
                     // Signed up
                    
-                    let profileImage = image || defaultProfile
+                    
                     const user = userCredential.user
                     try {
 
@@ -85,7 +85,7 @@ function Registration() {
                         // ...
                         let send = await updateProfile(user, {
                             displayName: name,
-                            photoURL: profileImage
+                            photoURL: image
                         })
 
 
@@ -160,8 +160,7 @@ function Registration() {
 
 
     let collectImg = (e) => {
-
-
+        
         let formdata = new FormData()
         formdata.append('file', e.target.files[0])
         formdata.append('upload_preset', 'Registration')
@@ -169,14 +168,15 @@ function Registration() {
             method: 'POST',
             body: formdata
         })
-            .then(res => res.json())
-            .then(res => setImage(res.secure_url))
-
-            .catch((error) => {
-                console.log('asdjf')
-            })
+        .then(res => res.json())
+        .then(res => setImage(res.secure_url))
+        
+        .catch((error) => {
+            console.log('asdjf')
+        })
     }
-
+    
+  
 
 
 
