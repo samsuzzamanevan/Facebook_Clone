@@ -10,6 +10,7 @@ import { getDatabase, push, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Oval } from "react-loader-spinner";
+import defaultProfile from '../assets/EmptyProfile.avif'
 
 
 function Registration() {
@@ -62,12 +63,15 @@ function Registration() {
         }
 
 
+        
 
         if (name && email && password && cpassword && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) && /(?=.*[a-z])/.test(password) && /(?=.*[A-Z])/.test(password) && password === cpassword) {
             setLoader(true)
             createUserWithEmailAndPassword(auth, email, password)
                 .then(async (userCredential) => {
-                    // Signed up 
+                    // Signed up
+                    
+                    let profileImage = image || defaultProfile
                     const user = userCredential.user
                     try {
 
@@ -81,7 +85,7 @@ function Registration() {
                         // ...
                         let send = await updateProfile(user, {
                             displayName: name,
-                            photoURL: image
+                            photoURL: profileImage
                         })
 
 
@@ -109,7 +113,7 @@ function Registration() {
                         }
                             
                      let stop =   setInterval(() => {
-                         console.log(auth.currentUser.emailVerified)
+                        
                          emailverification()
                             
                         }, 3000);
@@ -150,12 +154,14 @@ function Registration() {
     
     
     
-    
+   
     
 
     
 
     let collectImg = (e) => {
+
+      
         let formdata = new FormData()
         formdata.append('file', e.target.files[0])
         formdata.append('upload_preset', 'Registration')
@@ -188,10 +194,14 @@ function Registration() {
                     <div>
                         <label htmlFor="image">
                             <div className="h-30 w-30 rounded-full bg-amber-200">
-                                <img src={image} alt="" className="h-full w-full rounded-full object-top object-cover" />
+                                <img src={image?image:defaultProfile} alt="" className="h-full w-full rounded-full object-top object-cover" />
                             </div>
                         </label>
-                        <Input type="file" className="hidden" id='image' onchange={(e) => collectImg(e)} />
+                        <Input type="file" className="hidden" id='image' onchange={(e) => {
+                          e.target.files[0]
+                          collectImg(e)
+                          
+                        }} />
                         <Label labelText='Upload a Photo' id='image' className='font-[inter]' />
                     </div>
 
@@ -277,3 +287,6 @@ function Registration() {
 
 export default Registration
 
+
+
+// 
