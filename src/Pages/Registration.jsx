@@ -206,7 +206,7 @@ function Registration() {
                     </div>
 
                     {/* Name */}
-                    <div>
+                    <div className="w-8/11">
 
                         <Label labelText='Name : ' id='name' className={`font-[inter] text-base block mb-1 ${nameError == '' ? '' : ' text-red-400'}`} />
                         <Input type='text' inpText='Write Your Name' className={`w-10/10 py-1 px-1 font-[inter] text-base outline-none border  rounded-lg ${nameError == '' ? 'border-[rgba(44,44,44,0.2)]' : 'border-red-500 text-red-600'}`} id='name'
@@ -220,7 +220,7 @@ function Registration() {
 
                     {/* Email */}
 
-                    <div>
+                    <div className="w-8/11">
 
                         <Label labelText='Email Address : ' id='email' className={`font-[inter] text-base block mb-1 ${emailError == '' ? '' : ' text-red-400'}`} />
                         <Input type='text' inpText='Email' className={`w-10/10 py-1 px-1 font-[inter] text-base outline-none border  rounded-lg ${emailError == '' ? 'border-[rgba(44,44,44,0.2)]' : 'border-red-500 text-red-600'}`} id='email'
@@ -250,7 +250,7 @@ function Registration() {
 
                     {/* Confirm Password */}
 
-                    <div>
+                    <div className="w-8/11">
 
                         <Label labelText='Confirm Password : ' id='cpassword' className={`font-[inter] text-base block mb-1 ${cpasswordError == '' ? '' : ' text-red-400'}`} />
                         <Input type='password' inpText='Confirm Password' className={`w-10/10 py-1 px-1 font-[inter] text-base outline-none border  rounded-lg ${cpasswordError == '' ? 'border-[rgba(44,44,44,0.2)]' : 'text-red-600'}`} id='cpassword'

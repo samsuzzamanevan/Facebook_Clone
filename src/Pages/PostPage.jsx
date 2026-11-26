@@ -112,7 +112,7 @@ function PostPage({ className, image, name, setPostType }) {
 
                 <Flex className='py-3 px-3 border-b border-[#a1a1a188]'>
 
-                    <div className='font-[roboto] text-md w-1/3' onClick={() => setPostType(true)}><RxCross2 />
+                    <div className='font-[roboto] text-md w-1/3' onClick={() => setPostType("A")}><RxCross2 />
                     </div>
                     <Heading1 hea1Text='New Post' className='font-[inter] text-base font-medium ' />
 

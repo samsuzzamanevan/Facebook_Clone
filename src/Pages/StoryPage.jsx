@@ -90,12 +90,12 @@ function StoryPage({ name, image, setPostType }) {
             <div className='w-full  h-screen'>
                 <Flex className='py-2 px-3 gap-x-1.5'>
                     <div className='w-3/10'>
-                        <RxCross2 />
+                        <RxCross2 onClick={()=> setPostType("A")}/>
                     </div>
                     <h1 className=' font-[inter] text-lg font-semibold'>New Story</h1>
                 </Flex>
                 <Flex className='gap-x-3 mt-1.5 mb-5 px-3'>
-                    <Image className='rounded-full  w-9.5 h-9.5' src={image ? image : defaultProfile} />
+                    <Image className='rounded-full object-full object-center w-9.5 h-9.5' src={image ? image : defaultProfile} />
                     <Peragraph pText={name} className='font-[roboto] font-medium' />
                 </Flex>
                 <div className='my-3'>

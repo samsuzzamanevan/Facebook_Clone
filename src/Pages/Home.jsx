@@ -12,7 +12,7 @@ import Evan from '../assets/Evan.jpeg'
 import { BsFileImage } from "react-icons/bs";
 import { FaEarthAsia } from "react-icons/fa6";
 import { BsThreeDots } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
+import { RxCross1, RxCross2, RxCrosshair2 } from "react-icons/rx";
 import { SlLike } from "react-icons/sl";
 import { FaRegComment } from "react-icons/fa6";
 import { PiShareFat } from "react-icons/pi";
@@ -26,7 +26,7 @@ import StoryPage from './StoryPage';
 
 
 
-
+// 4ta kaaj baqu ase, 1.. like , 2.. comment , 3.. ekta nirdisto time er por story delete hoye jawa , 4.. post create hole tar time dekhano...
 
 
 
@@ -42,6 +42,7 @@ function Home() {
     let [arr, setArr] = useState([])
     let [storyArr, setStoryArr] = useState([])
     let [fileType, setFileType] = useState('')
+    let [visuStory, setVisuStory] = useState(null)
 
 
     useEffect(() => {
@@ -80,11 +81,18 @@ function Home() {
 
     }, [])
 
-    console.log(storyArr)
 
 
 
-    let [postType, setPostType] = useState(true)
+
+    let visualStory = (item) => {
+        setVisuStory(item)
+        setPostType("D")
+    }
+
+
+
+    let [postType, setPostType] = useState('A')
 
 
 
@@ -95,7 +103,7 @@ function Home() {
 
 
             {
-                postType
+                postType === 'A'
                     ?
                     <>
                         {/* logo part start */}
@@ -132,10 +140,10 @@ function Home() {
                                 <div className='w-9.5 h-9.5  '>
                                     <Image className='object-cover object-center w-full h-full rounded-full' src={profile.Image ? profile.Image : defaultProfile} />
                                 </div>
-                                <div className=' py-0.5 px-4 w-8/10  rounded-2xl border border-[rgba(0,0,0,0.25)] font-[roboto] text-base text-[rgba(0,0,0,0.76)]' onClick={() => setPostType(false)}>
+                                <div className=' py-0.5 px-4 w-8/10  rounded-2xl border border-[rgba(0,0,0,0.25)] font-[roboto] text-base text-[rgba(0,0,0,0.76)]' onClick={() => setPostType("C")}>
                                     What's on your mind?
                                 </div>
-                                <BsFileImage className='text-[#838282]' onClick={() => setPostType(false)} />
+                                <BsFileImage className='text-[#838282]' onClick={() => setPostType("C")} />
 
                             </Flex>
                         </div>
@@ -153,32 +161,32 @@ function Home() {
                             <div className='py-2 overflow-x-auto scrollbar-none bg-white'>
                                 <Flex className='gap-x-1 w-max'>
 
-                                    <div className='h-50 w-30 rounded-md ms-1 bg-blue-50 relative border border-[#57555525]'>
+                                    <div className='h-50 w-30 rounded-md ms-1 bg-blue-50 relative border border-[#57555525]' onClick={() => setPostType("B")}>
                                         <div className='p-2.5 text-white bg-blue-600 rounded-full border-2 border-white absolute bottom-8 left-11 '>
                                             <MdAdd />
                                         </div>
                                         <Peragraph pText='Create story' className='font-[roboto] text-[10px] text-black absolute bottom-0.5 left-[50%] -translate-x-9  w-17 text-center' />
-                                        <Image alt='adsf' src={profile.Image?profile.Image:defaultProfile} className='w-full h-7/10 border-b-[rgba(141,139,139,0.2)] border-b object-top object-cover rounded-t-md border-0' />
+                                        <Image alt='adsf' src={profile.Image ? profile.Image : defaultProfile} className='w-full h-7/10 border-b-[rgba(141,139,139,0.2)] border-b object-top object-cover rounded-t-md border-0' />
                                     </div>
 
 
 
                                     {
                                         storyArr.map((items, index) => {
-                                            
-                                            return <div className='h-50 w-30 rounded-md  relative' key={index}>
+
+                                            return <div className='h-50 w-30 rounded-md  relative' key={index} onClick={() => visualStory(items)}>
                                                 <div className='h-9.5 w-9.5 rounded-full  absolute top-1.5 left-1.5'>
-                                                    <Image className='object-cover object-center' src={items.profilepic?items.profilepic:defaultProfile}/>
+                                                    <Image className='object-cover object-center' src={items.profilepic ? items.profilepic : defaultProfile} />
                                                 </div>
                                                 <Peragraph pText={items.username} className='font-[roboto] text-[10px] font-semibold text-white absolute bottom-3 left-2' />
                                                 {
                                                     items.storyType == 'image'
-                                                    ?
-                                                    <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={items.story} />
-                                                    :items.storyType == 'video'
-                                                    &&
-                                                    <video src={items.story} className='w-full h-full object-top object-cover rounded-md border-0' controls></video>
-                                                    
+                                                        ?
+                                                        <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={items.story} />
+                                                        : items.storyType == 'video'
+                                                        &&
+                                                        <video src={items.story} className='w-full h-full  rounded-md border-0'></video>
+
                                                 }
                                             </div>
                                         })
@@ -289,12 +297,45 @@ function Home() {
 
                             {/* Post part end */}
                         </div>
-                        {/* <Navbar /> */}
-                        <StoryPage name={profile.Name} image={profile.Image} setPostType={setPostType} />
+                        <Navbar />
+
+
                     </>
 
-                    : <PostPage name={profile.Name} image={profile.Image} setPostType={setPostType} />
+
+
+                    : postType === 'B'
+                        ?
+                        <StoryPage name={profile.Name} image={profile.Image} setPostType={setPostType} />
+                        : postType === 'C'
+                            ?
+                            <PostPage name={profile.Name} image={profile.Image} setPostType={setPostType} />
+                            :
+                            postType === "D"
+                            &&
+                            <div className='h-screen w-full relative '>
+                                <Flex className='justify-between px-1.5 absolute w-full top-1.5'>
+                                    <Flex className='gap-x-1.5  top-1.5 left-1.5'>
+                                        <div className='w-9.5 h-9.5  top-2.5 left-1.5 '>
+                                            <Image className='object-cover object-center w-full h-full rounded-full' src={visuStory.profilepic ? visuStory.profilepic : defaultProfile} />
+                                        </div>
+                                        <Peragraph pText={visuStory.username} className="font-[inter] text-base font-medium text-white" />
+                                    </Flex>
+                                    <RxCross1 className='text-white' onClick={() => setPostType("A")} />
+                                </Flex>
+                                {
+                                    visuStory.storyType === "image"
+                                        ?
+                                        <Image src={visuStory.story} alt='askj' className='w-full h-full object-center object-cover' />
+                                        :visuStory.storyType === "video" &&
+                                        <video src={visuStory.story} alt='askj' className='w-full h-full object-center object-cover' controls></video>
+                                }
+                            </div>
             }
+
+
+
+
 
 
         </>
