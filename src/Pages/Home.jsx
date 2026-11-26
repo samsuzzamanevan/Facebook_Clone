@@ -21,7 +21,8 @@ import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from '../FirebaseConfig';
 import PostPage from './PostPage';
-import defaultProfile from '../assets/EmptyProfile.avif'
+import defaultProfile from '../assets/EmptyProfile.png'
+import StoryPage from './StoryPage';
 
 
 
@@ -39,7 +40,8 @@ function Home() {
     const db = getDatabase(app)
     let [profile, setProfile] = useState({})
     let [arr, setArr] = useState([])
-    let [fileType,setFileType] = useState('')
+    let [storyArr, setStoryArr] = useState([])
+    let [fileType, setFileType] = useState('')
 
 
     useEffect(() => {
@@ -52,11 +54,11 @@ function Home() {
                 })
             }
         })
-        
+
         const starCountRef = ref(db, 'posts/');
         onValue(starCountRef, (snapshot) => {
             const data = snapshot
-  
+
             let arr2 = []
             data.forEach(itmes => {
 
@@ -65,10 +67,21 @@ function Home() {
             setArr(arr2)
         });
 
-        
+        const starCountRef2 = ref(db, 'stories/');
+        onValue(starCountRef2, (snapshot) => {
+            const data = snapshot
+            let storyArr2 = []
+            data.forEach(item => {
+                storyArr2.push(item.val())
+            })
+            setStoryArr(storyArr2)
+        });
+
+
     }, [])
-    
-   
+
+    console.log(storyArr)
+
 
 
     let [postType, setPostType] = useState(true)
@@ -117,7 +130,7 @@ function Home() {
                             <Flex className='justify-between'>
 
                                 <div className='w-9.5 h-9.5  '>
-                                    <Image className='object-cover object-center w-full h-full rounded-full' src={profile.Image?profile.Image:defaultProfile} />
+                                    <Image className='object-cover object-center w-full h-full rounded-full' src={profile.Image ? profile.Image : defaultProfile} />
                                 </div>
                                 <div className=' py-0.5 px-4 w-8/10  rounded-2xl border border-[rgba(0,0,0,0.25)] font-[roboto] text-base text-[rgba(0,0,0,0.76)]' onClick={() => setPostType(false)}>
                                     What's on your mind?
@@ -140,48 +153,36 @@ function Home() {
                             <div className='py-2 overflow-x-auto scrollbar-none bg-white'>
                                 <Flex className='gap-x-1 w-max'>
 
-                                    <div className='h-50 w-30 rounded-md  bg-blue-50 relative border border-[#57555525]'>
-                                        <div className='p-2.5 text-white bg-blue-600 rounded-full border border-white absolute bottom-8 left-11 '>
+                                    <div className='h-50 w-30 rounded-md ms-1 bg-blue-50 relative border border-[#57555525]'>
+                                        <div className='p-2.5 text-white bg-blue-600 rounded-full border-2 border-white absolute bottom-8 left-11 '>
                                             <MdAdd />
                                         </div>
                                         <Peragraph pText='Create story' className='font-[roboto] text-[10px] text-black absolute bottom-0.5 left-[50%] -translate-x-9  w-17 text-center' />
-                                        <Image alt='adsf' src={Evan} className='w-full h-7/10 object-top object-cover rounded-t-md border-0' />
+                                        <Image alt='adsf' src={profile.Image?profile.Image:defaultProfile} className='w-full h-7/10 border-b-[rgba(141,139,139,0.2)] border-b object-top object-cover rounded-t-md border-0' />
                                     </div>
-                                    <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
-                                        <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
-                                            <Image className='object-cover object-center' />
-                                        </div>
-                                        <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
-                                        <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
-                                    </div>
-                                    <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
-                                        <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
-                                            <Image className='object-cover object-center' />
-                                        </div>
-                                        <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
-                                        <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
-                                    </div>
-                                    <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
-                                        <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
-                                            <Image className='object-cover object-center' />
-                                        </div>
-                                        <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
-                                        <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
-                                    </div>
-                                    <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
-                                        <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
-                                            <Image className='object-cover object-center' />
-                                        </div>
-                                        <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
-                                        <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
-                                    </div>
-                                    <div className='h-50 w-30 rounded-md  bg-amber-200 relative'>
-                                        <div className='h-9.5 w-9.5 rounded-full bg-red-500 absolute top-1.5 left-1.5'>
-                                            <Image className='object-cover object-center' />
-                                        </div>
-                                        <Peragraph pText='aldjfadsfasdf lkajsdlkfjlkjoij' className='font-[roboto] text-[10px] font-normal text-white absolute bottom-3 left-1' />
-                                        <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={Evan} />
-                                    </div>
+
+
+
+                                    {
+                                        storyArr.map((items, index) => {
+                                            
+                                            return <div className='h-50 w-30 rounded-md  relative' key={index}>
+                                                <div className='h-9.5 w-9.5 rounded-full  absolute top-1.5 left-1.5'>
+                                                    <Image className='object-cover object-center' src={items.profilepic?items.profilepic:defaultProfile}/>
+                                                </div>
+                                                <Peragraph pText={items.username} className='font-[roboto] text-[10px] font-semibold text-white absolute bottom-3 left-2' />
+                                                {
+                                                    items.storyType == 'image'
+                                                    ?
+                                                    <Image alt='asdf' className='w-full h-full object-top object-cover rounded-md border-0' src={items.story} />
+                                                    :items.storyType == 'video'
+                                                    &&
+                                                    <video src={items.story} className='w-full h-full object-top object-cover rounded-md border-0' controls></video>
+                                                    
+                                                }
+                                            </div>
+                                        })
+                                    }
 
                                 </Flex>
                             </div>
@@ -202,7 +203,7 @@ function Home() {
 
                                 {
                                     arr.map((item, index) => {
-                                     console.log(item.profileImage)
+
 
                                         return <div className='bg-white my-1' key={index}>
 
@@ -211,7 +212,7 @@ function Home() {
                                                 <Flex className='gap-x-1.5'>
 
                                                     <div className='w-9.5 h-9.5 '>
-                                                        <Image className='object-cover object-center w-full h-full rounded-full' src={item.profileImage?item.profileImage:defaultProfile} />
+                                                        <Image className='object-cover object-center w-full h-full rounded-full' src={item.profileImage ? item.profileImage : defaultProfile} />
                                                     </div>
 
                                                     <div>
@@ -241,13 +242,13 @@ function Home() {
                                                     <div className='h-40 w-full bg-blue-50'>
                                                         {
                                                             item.filetype == 'image'
-                                                            ?
-                                                            <Image className='h-full w-full object-center object-contain' src={item.post} />
-                                                            :
-                                                            item.filetype == 'video'
-                                                            ?
-                                                            <video src={item.post} controls className='h-full w-full object-center object-contain'></video>
-                                                            :''
+                                                                ?
+                                                                <Image className='h-full w-full object-center object-contain' src={item.post} />
+                                                                :
+                                                                item.filetype == 'video'
+                                                                    ?
+                                                                    <video src={item.post} controls className='h-full w-full object-center object-contain'></video>
+                                                                    : ''
                                                         }
                                                     </div>
                                                     : ''
@@ -288,7 +289,8 @@ function Home() {
 
                             {/* Post part end */}
                         </div>
-                        <Navbar />
+                        {/* <Navbar /> */}
+                        <StoryPage name={profile.Name} image={profile.Image} setPostType={setPostType} />
                     </>
 
                     : <PostPage name={profile.Name} image={profile.Image} setPostType={setPostType} />

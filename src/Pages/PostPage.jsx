@@ -9,34 +9,36 @@ import Button from '../Layouts/Button'
 import { getDatabase, push, ref, set } from "firebase/database";
 import app from '../FirebaseConfig'
 import { Oval } from 'react-loader-spinner'
-import defaultProfile from '../assets/EmptyProfile.avif'
+import defaultProfile from '../assets/EmptyProfile.png'
+import { RxCross2 } from "react-icons/rx";
+
 
 function PostPage({ className, image, name, setPostType }) {
-    console.log(name)
+
     const db = getDatabase(app)
 
     let [postDes, setPostDes] = useState('')
     let [postImage, setPostImage] = useState('')
     let [visImg, setVisImg] = useState(null)
     let [file, setFile] = useState('')
-    let disabled = postDes.trim() !== '' || visImg
-    let [loader,setLoader] = useState(false)
+    let disabled = postDes.trim() !== '' || postImage
+    let [loader, setLoader] = useState(false)
 
-    
-   
 
-    
-    
-    
+
+
+
+
+
     let post = () => {
-        
-       
-        
+
+
+
         if (!disabled) {
             return
         }
-        
-        
+
+
         else if (visImg !== null) {
             setLoader(true)
             let formdata = new FormData()
@@ -48,23 +50,24 @@ function PostPage({ className, image, name, setPostType }) {
                 body: formdata
             })
                 .then(res => res.json())
-                .then( res => {
+                .then(res => {
 
                     let url = res.secure_url
                     let type = res.resource_type
-                     set(push(ref(db, 'posts/')), {
+                    set(push(ref(db, 'posts/')), {
                         username: name,
                         profileImage: image,
                         post: url,
                         des: postDes,
                         filetype: type
-                    }).then(()=>{
-                        setPostDes('')
+                    }).then(() => {
                         setVisImg(null)
                         setPostType(true)
                         setLoader(false)
-
+                        
                     })
+                    setPostImage(null)
+                    setPostDes('')
                 })
 
 
@@ -73,22 +76,25 @@ function PostPage({ className, image, name, setPostType }) {
 
         else {
             setLoader(true)
+            let post = postDes
             set(push(ref(db, 'posts/')), {
                 username: name,
                 profileImage: image,
-                des: postDes
-            }).then(()=>{
-              setPostDes('')
-            setVisImg(null)
-            setPostType(true)
-            setLoader(false)  
+                des: post
+            }).then(() => {
+                setVisImg(null)
+                setPostType(true)
+                setLoader(false)
             })
             
+            setPostDes('')
 
         }
 
 
     }
+
+
 
 
     let collectImage = (e) => {
@@ -106,13 +112,14 @@ function PostPage({ className, image, name, setPostType }) {
 
                 <Flex className='py-3 px-3 border-b border-[#a1a1a188]'>
 
-                    <div className='font-[roboto] text-md w-1/3' onClick={() => setPostType(true)}>X</div>
+                    <div className='font-[roboto] text-md w-1/3' onClick={() => setPostType(true)}><RxCross2 />
+                    </div>
                     <Heading1 hea1Text='New Post' className='font-[inter] text-base font-medium ' />
 
                 </Flex>
 
                 <Flex className='gap-x-3.5 py-3 px-3'>
-                    <Image className='w-9.5 h-9.5 rounded-full object-center object-cover' src={image?image:defaultProfile} />
+                    <Image className='w-9.5 h-9.5 rounded-full object-center object-cover' src={image ? image : defaultProfile} />
                     <Peragraph pText={name} className='font-[inter] text-base font-medium' />
                 </Flex>
 
@@ -145,20 +152,20 @@ function PostPage({ className, image, name, setPostType }) {
                 </div>
                 {
                     loader
-                    ? <Oval
-                    visible={true}
-                    height="30"
-                    width="30"
-                    color="black"
-                    ariaLabel="oval-loading"
-                    wrapperStyle={{
-                        marginLeft:'45%',
-                        marginBottom:'10px'
-                        
-                    }}
-                    wrapperClass=""
-                />
-                    :''
+                        ? <Oval
+                            visible={true}
+                            height="30"
+                            width="30"
+                            color="black"
+                            ariaLabel="oval-loading"
+                            wrapperStyle={{
+                                marginLeft: '45%',
+                                marginBottom: '10px'
+
+                            }}
+                            wrapperClass=""
+                        />
+                        : ''
                 }
                 <Button btnText='Post' className={`${disabled ? 'bg-blue-400' : 'bg-blue-100'}  py-1 px-5 text-white font-[inter] font-medium rounded-md block mx-auto`} onclick={post}
                 />
@@ -166,7 +173,7 @@ function PostPage({ className, image, name, setPostType }) {
 
             </div>
 
-           
+
 
         </>
     )

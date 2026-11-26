@@ -10,7 +10,7 @@ import { getDatabase, push, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Oval } from "react-loader-spinner";
-import defaultProfile from '../assets/EmptyProfile.avif'
+import defaultProfile from '../assets/EmptyProfile.png'
 
 
 function Registration() {
