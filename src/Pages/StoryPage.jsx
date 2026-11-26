@@ -10,6 +10,7 @@ import Button from '../Layouts/Button'
 import { getDatabase, push, ref, set } from "firebase/database";
 import app from '../FirebaseConfig'
 import { toast, ToastContainer } from 'react-toastify'
+import { Oval } from 'react-loader-spinner'
 
 function StoryPage({ name, image, setPostType }) {
 
@@ -19,6 +20,7 @@ function StoryPage({ name, image, setPostType }) {
     let [type, setType] = useState('')
     let disabled = visuImg
     let [storyImg,setStoryImg] = useState(null)
+    let [loader,setLoader] = useState(false)
 
     let db = getDatabase(app)
 
@@ -26,7 +28,7 @@ function StoryPage({ name, image, setPostType }) {
 
     let post = () => {
 
-
+        setLoader(true)
 
         if (!disabled) {
             return
@@ -55,6 +57,8 @@ function StoryPage({ name, image, setPostType }) {
                     console.log('done')
                     setVisuImg(null)
                     setStoryImg(null)
+                    setPostType("A")
+                    setLoader(false)
                   })
                   .catch(()=> toast.error('problem'))
             })
@@ -113,6 +117,23 @@ function StoryPage({ name, image, setPostType }) {
                     collection(e)
                     setStoryImg(e.target.files[0])
                 }} />
+                {
+                    loader
+                    ?<Oval
+                    visible={true}
+                    height="30"
+                    width="30"
+                    color="black"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{
+                        marginLeft: '45%',
+                        marginBottom: '10px',
+                        marginTop: '10px'
+                    }}
+                    wrapperClass=""
+                />
+                    :''
+                }
                 <Button btnText='Post' className={`${disabled ? 'bg-blue-400' : 'bg-blue-100'}  py-1 px-5 text-white font-[inter] font-medium rounded-md block mx-auto my-2.5`} onclick={post} />
             </div>
         </>

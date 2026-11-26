@@ -62,7 +62,7 @@ function PostPage({ className, image, name, setPostType }) {
                         filetype: type
                     }).then(() => {
                         setVisImg(null)
-                        setPostType(true)
+                        setPostType("A")
                         setLoader(false)
                         
                     })
@@ -83,7 +83,7 @@ function PostPage({ className, image, name, setPostType }) {
                 des: post
             }).then(() => {
                 setVisImg(null)
-                setPostType(true)
+                setPostType("A")
                 setLoader(false)
             })
             
