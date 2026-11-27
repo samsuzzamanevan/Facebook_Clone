@@ -193,7 +193,7 @@ function Registration() {
 
                     <div>
                         <label htmlFor="image">
-                            <div className="h-30 w-30 rounded-full bg-amber-200">
+                            <div className="h-30 w-30 rounded-full ">
                                 <img src={image ? image : defaultProfile} alt="" className="h-full w-full rounded-full object-top object-cover" />
                             </div>
                         </label>
